@@ -1,0 +1,44 @@
+void Create_CRM_Task_From_Booking_Information(string id, string lastName, string leadId)
+{
+
+//Fetch Zoho Booking Information
+response = invokeurl
+[
+	url :"https://www.zohoapis.com/bookings/v1/json/getappointment?booking_id=" + id
+	type :GET
+	connection:"zoho_bookings_connection"
+];
+//Fetch Booking Information
+response = response.get("response").get("returnvalue");
+newline = hextoText("0A");
+startTime = response.get("iso_start_time");
+endTime = response.get("iso_end_time");
+bookingSummary = response.get("summary_url");
+meetingKey = response.get("meeting_info").get("meeting_key");
+meetingJoin = response.get("meeting_info").get("join_link");
+meetingStart = response.get("meeting_info").get("start_link");
+serviceName = response.get("service_name");
+meetingInfo = "Meeting Info" + newline + "Start Link : " + meetingStart + newline + "Join Link : " + meetingJoin + newline + "Meeting Key : " + meetingKey;
+//Create Task
+event = Map();
+event.put("zohobookingstest__Booking_Summary",bookingSummary);
+event.put("Start_DateTime",startTime);
+event.put("End_DateTime",endTime);
+event.put("Event_Title",lastName + " to " + serviceName);
+event.put("Description",meetingInfo);
+event.put("What_Id",leadId);
+event.put("$se_module","Leads");
+event.put("zohobookingstest__BookingId",id);
+event.put("Check_In_Status","PLANNED");
+event.put("Venue",meetingJoin);
+event.put("Owner",4281149000000242013);
+participantsList = list();
+participant = Map();
+participant.put("type","lead");
+participant.put("participant",leadId);
+participantsList.add(participant);
+event.put("Participants",participantsList);
+optinalMap = Map();
+createMeeting = zoho.crm.createRecord("Events",event,optinalMap,"zoho_crm");
+info createMeeting;
+}
