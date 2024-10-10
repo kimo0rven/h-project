@@ -1,0 +1,85 @@
+StringFetch_Projects_Timesheet_Update_CRM_Data(String id) {
+record = zoho.crm.getRecordById("ZProject_DB", id);
+zprojectId = record.get("Zoho_Project_ID");
+// zprojectId = 1511689000008936097;
+portalId = 700847588;
+//Get Project Details
+project = invokeurl
+[
+	url: "https://projectsapi.zoho.com/restapi/portal/" + portalId + "/projects/" + zprojectId + "/"
+	type: GET
+	connection: "zoho_projects_connection"
+];
+// info project;
+project = project.get("projects").get(0);
+customFields = project.get("custom_fields");
+//Get Customer Id OBJECT from CUSTOM FIELD LIST
+customerId = "";
+for each x in customFields {
+	if(x.getJson("Zoho Books Customer ID") != null) {
+		customerId = x.get("Zoho Books Customer ID");
+		break;
+	}
+}
+
+//Get Start & End of the month dates
+startofMonth = zoho.currentdate.toStartOfMonth().toString("MM-dd-yyyy");
+endOfMonth = zoho.currentdate.eomonth(0).toString("MM-dd-yyyy");
+//Get Project Timesheet Parameter Values
+parameter_data = Map();
+parameter_data.put("users_list","all");
+parameter_data.put("view_type","custom_date");
+parameter_data.put("date",zoho.currentdate.toString("MM-dd-yyyy"));
+parameter_data.put("bill_status","Billable");
+parameter_data.put("component_type","task");
+parameter_data.put("custom_date",{"start_date":startofMonth,"end_date":endOfMonth});
+response = invokeurl
+[
+	url :"https://projectsapi.zoho.com/restapi/portal/" + portalId + "/projects/" + zprojectId + "/logs/"
+	type :GET
+	parameters:parameter_data
+	connection:"zoho_projects_connection"
+];
+// info response;
+Timelogs = list();
+if(response.length() == 0)
+{
+	Timelogs.add("No Timesheet Found");
+}
+else
+{
+	tasks = response.get("timelogs").get("date");
+	for each  task in tasks
+	{
+		taskInfo = Map();
+		hours = task.get("tasklogs").get(0).get("hours");
+		minutes = task.get("tasklogs").get(0).get("minutes");
+		totalMinutes = task.get("tasklogs").get(0).get("total_minutes");
+		taskName = task.get("tasklogs").get(0).get("task").get("name");
+		taskInfo.put("hours",hours);
+		taskInfo.put("minutes",minutes);
+		taskInfo.put("total_minutes",totalMinutes);
+		taskInfo.put("name",taskName);
+		Timelogs.add(taskInfo);
+	}
+	invoice = Map();
+	invoice.put("customer_id",customerId);
+	invoice.put("notes","Payable to HAFFERI DIGITAL INC.");
+	//Line Items
+	items = list();
+	optional = Map();
+	updateRecord = Map();
+	subform = list();
+	for each  time in Timelogs
+	{
+		item = Map();
+		item.put("name",time.get("name") + " - " + time.get("hours") + "h" + time.get("minutes") + "m");
+		items.add(item);
+		subform.add({"Project_Task_Name":time.get("name"),"Service_Total_Time_Minutes":time.get("hours") * 60 + time.get("minutes")});
+	}
+	updateRecord.put("Invoice_Line_Items",subform);
+	info zoho.crm.updateRecord("ZProject_DB",id,updateRecord);
+	
+}
+return "";
+}
