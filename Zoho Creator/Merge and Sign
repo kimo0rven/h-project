@@ -1,0 +1,46 @@
+documentid = "fve6lf5ba8d1896b94701b1942d2fea58f92f";
+//Analytics & Tracking
+mergeData = Map();
+data_list = list();
+//Merge Information
+creatorRecord = Map();
+creatorRecord.put(3912018000000161049,input.ZProjects_Name);
+//Project Name
+creatorRecord.put(3912018000000131256,input.Project_Description_and_Background);
+//
+data_list.add(creatorRecord);
+mergeData.put("data",data_list);
+params = Map();
+//Client Approval Copy
+signerList = List();
+signerObj1 = Map();
+signerObj1.put("recipient_1",input.Send_To);
+signerObj1.put("action_type","approve");
+signerObj1.put("language","en");
+//Contractor View Copy
+signerObj2 = Map();
+signerObj2.put("recipient_2",input.Send_To);
+signerObj2.put("action_type","view");
+signerObj2.put("language","en");
+//Internal View Copy
+signerObj3 = Map();
+signerObj3.put("recipient_3","kim@hafferi.com");
+signerObj3.put("action_type","view");
+signerObj3.put("language","en");
+//Add to List of Signers
+signerList.add(signerObj1);
+signerList.add(signerObj2);
+signerList.add(signerObj3);
+params.put("merge_data",mergeData);
+params.put("service_name","zohosign");
+params.put("filename",input.ZCRM_Client_Name + " - " + input.Expertise);
+params.put("signer_data",signerList);
+params.put("sign_in_order",true);
+response = invokeurl
+[
+	url :"https://www.zohoapis.com/writer/api/v1/documents/" + documentid + "/merge/sign"
+	type :POST
+	parameters:params
+	connection:"zoho_writer_connection"
+];
+info response;
