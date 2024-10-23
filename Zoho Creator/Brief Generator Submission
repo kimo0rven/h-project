@@ -1,0 +1,427 @@
+sendType = input.Send_Type;
+expertiseValue = input.Expertise;
+designUXDeliverable = input.Design_UX_Deliverables;
+//
+//
+pdfLink = "";
+if(expertiseValue == "Analytics & Tracking")
+{
+	mergeData = Map();
+	data_list = list();
+	//Merge Information
+	data = Map();
+	data.put(3912018000000161049,input.ZProjects_Name);
+	data.put(3912018000000131256,input.Project_Description_and_Background);
+	data.put(3912018000000131299,input.Start_Date.toString("dd-MMM-yyyy"));
+	data.put(3912018000000131307,input.Due_Date.toString("dd-MMM-yyyy"));
+	data.put(3912018000000131353,input.Project_Manager);
+	data.put(3912018000000131315,input.Service_Provider_Name);
+	data.put(3912018000000131391,input.Email_of_Service_Provider);
+	data.put(3912018000000163001,input.Client_Name);
+	data.put(3912018000000131409,input.Industry);
+	data.put(3912018000000152755,input.Website);
+	data.put(3912018000000131639,input.Client_Background);
+	data.put(3912018000000131647,input.Key_Stakeholder);
+	data.put(3912018000000131685,input.Website_CRM_Technology);
+	data.put(3912018000000152072,input.Tracking__Pixels_to_be_Implemented);
+	data.put(3912018000000152473,input.Phone_Call_Tracking);
+	data.put(3912018000000152016,input.Analytics_Tracking_Debugging);
+	data.put(3912018000000131264,input.Expertise);
+	//
+	data_list.add(data);
+	mergeData.put("data",data_list);
+	//
+	param = Map();
+	param.put("merge_data",mergeData);
+	param.put("output_format","pdf");
+	param.put("response_type","link");
+	param.put("test_mode",true);
+	info param;
+	//
+	documentid = "fve6lf5ba8d1896b94701b1942d2fea58f92f";
+	response = invokeurl
+	[
+		url :"https://www.zohoapis.com/writer/api/v1/documents/" + documentid + "/merge"
+		type :POST
+		parameters:param
+		connection:"zoho_writer_connection"
+	];
+	//info response;
+	pdfLink = response.get("URL");
+}
+if(expertiseValue == "Design/UX")
+{
+	info expertiseValue;
+	if(input.Design_UX_Deliverables == "Landing Page Design")
+	{
+		mergeData1 = Map();
+		data_list1 = list();
+		//Merge Information
+		data1 = Map();
+		data1.put(3912018000000161049,input.ZProjects_Name);
+		data1.put(3912018000000131256,input.Project_Description_and_Background);
+		data1.put(3912018000000131299,input.Start_Date.toString("dd-MMM-yyyy"));
+		data1.put(3912018000000131307,input.Due_Date.toString("dd-MMM-yyyy"));
+		data1.put(3912018000000131353,input.Project_Manager);
+		data1.put(3912018000000131315,input.Service_Provider_Name);
+		data1.put(3912018000000131391,input.Email_of_Service_Provider);
+		data1.put(3912018000000163001,input.ZCRM_Client_Name);
+		data1.put(3912018000000131409,input.Industry);
+		data1.put(3912018000000152755,input.Website);
+		data1.put(3912018000000131639,input.Client_Background);
+		data1.put(3912018000000131647,input.Key_Stakeholder);
+		data1.put(3912018000000161001,input.Design_UX_Deliverables);
+		data1.put(3912018000000156524,input.Campaign_Objective);
+		data1.put(3912018000000156197,input.Target_Audience);
+		data1.put(3912018000000156205,input.Key_Messaging_Offer_Details);
+		data1.put(3912018000000156213,input.Specific_CTA);
+		//Format data from HTML
+		link1 = input.Link_to_brand_voice_tone_document.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000156221,link1);
+		//Format data from HTML
+		link2 = input.Link_to_visual_guidelines.remove("<a href=");
+		link2 = link2.remove("\"");
+		_blankIndex = link2.find("_blank");
+		link2 = link2.left(_blankIndex - 10);
+		data1.put(3912018000000156229,link2);
+		data1.put(3912018000000156245,input.Any_specific_competitor_landing_pages_to_review);
+		data1.put(3912018000000156259,input.If_yes_list_competitors);
+		data1.put(3912018000000156306,input.Main_Components_Required);
+		//Format data from HTML
+		link3 = input.Link_to_visual_assets_e_g_product_images_logos.remove("<a href=");
+		link3 = link3.remove("\"");
+		_blankIndex = link3.find("_blank");
+		link3 = link3.left(_blankIndex - 10);
+		data1.put(3912018000000156364,link3);
+		data1.put(3912018000000156374,input.Should_the_focus_be_more_on_mobile_or_desktop);
+		data1.put(3912018000000131264,input.Expertise);
+		data_list1.add(data1);
+		mergeData1.put("data",data_list1);
+		//
+		param1 = Map();
+		param1.put("merge_data",mergeData1);
+		param1.put("output_format","pdf");
+		param1.put("response_type","link");
+		param1.put("test_mode",true);
+		documentid = "u916321ef8f0bd0604ce0a87219963a56147d";
+		// 		info param1;
+		response = invokeurl
+		[
+			url :"https://www.zohoapis.com/writer/api/v1/documents/" + documentid + "/merge"
+			type :POST
+			parameters:param1
+			connection:"zoho_writer_connection"
+		];
+		// 		info response.get("URL");
+		pdfLink = response.get("URL");
+	}
+	
+	if(input.Design_UX_Deliverables == "Branding and Identity Brief Checklist for Designers")
+	{
+		mergeData1 = Map();
+		data_list1 = list();
+		//Merge Information
+		data1 = Map();
+		data1.put(3912018000000161049,input.ZProjects_Name);
+		data1.put(3912018000000131256,input.Project_Description_and_Background);
+		data1.put(3912018000000131299,input.Start_Date.toString("dd-MMM-yyyy"));
+		data1.put(3912018000000131307,input.Due_Date.toString("dd-MMM-yyyy"));
+		data1.put(3912018000000131353,input.Project_Manager);
+		data1.put(3912018000000131315,input.Service_Provider_Name);
+		data1.put(3912018000000131391,input.Email_of_Service_Provider);
+		data1.put(3912018000000163001,input.ZCRM_Client_Name);
+		data1.put(3912018000000131409,input.Industry);
+		data1.put(3912018000000152755,input.Website);
+		data1.put(3912018000000131639,input.Client_Background);
+		data1.put(3912018000000131647,input.Key_Stakeholder);
+		//
+		data1.put(3912018000000156561,input.What_is_the_brand_name);
+		data1.put(3912018000000156583,input.What_is_the_brand_s_mission_or_primary_goal);
+		data1.put(3912018000000156591,input.List_the_brand_s_core_values);
+		data1.put(3912018000000156575,input.What_sets_the_brand_apart_from_its_competitors);
+		data1.put(3912018000000156623,input.Who_is_the_primary_target_audience_age_gender_location_income_etc);
+		data1.put(3912018000000156615,input.What_are_their_values_interests_or_lifestyles);
+		data1.put(3912018000000156607,input.What_problems_does_the_target_audience_have_that_the_brand_solves);
+		data1.put(3912018000000156672,input.Which_traits_best_describe_the_brand);
+		data1.put(3912018000000156728,input.Trait_Other);
+		data1.put(3912018000000156839,input.What_is_the_preferred_tone_of_communication);
+		data1.put(3912018000000156960,input.Brand_Tone_Other);
+		//Format from HTML
+		link1 = input.Provide_a_link.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000156983,link1);
+		data1.put(3912018000000156995,input.Is_a_new_logo_required);
+		data1.put(3912018000000157009,input.If_yes_are_there_any_specific_ideas_or_concepts_for_the_logo);
+		data1.put(3912018000000157019,input.Should_an_existing_color_palette_be_used_or_should_the_designer_propose_new_colors);
+		//Format from HTML
+		link1 = input.If_using_an_existing_palette_provide_a_link.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157033,link1);
+		data1.put(3912018000000157043,input.Is_there_a_specific_font_family_that_should_be_used);
+		//Format from HTML
+		link1 = input.If_using_existing_fonts_provide_a_link_or_name.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157057,link1);
+		data1.put(3912018000000157091,input.What_type_of_visual_style_is_preferred);
+		data1.put(3912018000000157151,input.Visual_Style_Other);
+		data1.put(3912018000000157185,input.Which_branding_elements_should_be_created_or_redesigned);
+		data1.put(3912018000000157253,input.Branding_Elements_Other);
+		data1.put(3912018000000157263,input.Who_are_the_brand_s_main_competitors);
+		data1.put(3912018000000157271,input.Are_there_any_competitors_whose_branding_you_admire);
+		data1.put(3912018000000157287,input.If_yes_list_competitors_and_why_their_branding_is_admired);
+		data1.put(3912018000000157297,input.Are_there_any_additional_design_preferences_or_requirements);
+		data1.put(3912018000000157305,input.Any_specific_design_elements_or_styles_to_avoid);
+		data1.put(3912018000000157315,input.Where_should_final_design_files_be_delivered);
+		data1.put(3912018000000157323,input.Preferred_file_formats_e_g_PNG_JPG_SVG_etc);
+		//Format from HTML
+		link1 = input.If_using_existing_fonts_provide_a_link_or_name.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157331,link1);
+		//Format from HTML
+		link1 = input.If_using_existing_fonts_provide_a_link_or_name.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157339,link1);
+		data1.put(3912018000000131264,input.Expertise);
+		data1.put(3912018000000161001,input.Design_UX_Deliverables);
+		//
+		data_list1.add(data1);
+		mergeData1.put("data",data_list1);
+		//
+		param1 = Map();
+		param1.put("merge_data",mergeData1);
+		param1.put("output_format","pdf");
+		param1.put("response_type","link");
+		param1.put("test_mode",true);
+		documentid = "aog0r4b161a008a194afab0e31f405c4b032c";
+		response = invokeurl
+		[
+			url :"https://www.zohoapis.com/writer/api/v1/documents/" + documentid + "/merge"
+			type :POST
+			parameters:param1
+			connection:"zoho_writer_connection"
+		];
+		info response.get("URL");
+		pdfLink = response.get("URL");
+	}
+	
+	if (input.Design_UX_Deliverables == "Website/Blog Design Brief Checklist for Designers") {
+		
+		mergeData1 = Map();
+		data_list1 = list();
+		//Merge Information
+		data1 = Map();
+		data1.put(3912018000000161049,input.ZProjects_Name);
+		data1.put(3912018000000131256,input.Project_Description_and_Background);
+		data1.put(3912018000000131299,input.Start_Date.toString("dd-MMM-yyyy"));
+		data1.put(3912018000000131307,input.Due_Date.toString("dd-MMM-yyyy"));
+		data1.put(3912018000000131353,input.Project_Manager);
+		data1.put(3912018000000131315,input.Service_Provider_Name);
+		data1.put(3912018000000131391,input.Email_of_Service_Provider);
+		data1.put(3912018000000163001,input.ZCRM_Client_Name);
+		data1.put(3912018000000131409,input.Industry);
+		data1.put(3912018000000152755,input.Website);
+		data1.put(3912018000000131639,input.Client_Background);
+		data1.put(3912018000000131647,input.Key_Stakeholder);
+		//
+		data1.put(3912018000000161001, input.Design_UX_Deliverables);
+		data1.put(3912018000000157409, input.What_is_the_primary_purpose_of_the_website_or_blog);
+		data1.put(3912018000000157429, input.Blog_Purpose_Other);
+		data1.put(3912018000000157439, input.Who_is_the_target_audience_demographics_interests_etc);
+		data1.put(3912018000000157449, input.Briefly_describe_the_brand_or_business);
+		data1.put(3912018000000157461, input.Provide_a_general_site_map_or_page_structure_e_g_Home_About_Services_Blog_Contact);
+		data1.put(3912018000000157506, input.Core_Pages_to_Include);
+		data1.put(3912018000000157574, input.Core_Pages_Other);
+		data1.put(3912018000000157586, input.Will_the_client_provide_all_content_text_images_etc);
+		data1.put(3912018000000157628, input.What_is_the_preferred_design_style_for_the_website_blog);
+		data1.put(3912018000000157688, input.Preffered_Design_Style_Other);
+		data1.put(3912018000000157698, input.Should_the_website_follow_the_existing_brand_color_palette_or_propose_new_colors);
+		//Format from HTML
+		link1 = input.Link_to_existing_color_palette_if_applicable.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157725, link1);
+		data1.put(3912018000000157735, input.Is_there_a_preferred_font_or_typography_style_to_use);
+		//Format from HTML
+		link1 = input.Link_to_existing_font_guide_if_applicable.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157757, link1);
+		data1.put(3912018000000157772, input.Will_a_logo_be_provided);
+		//Format from HTML
+		link1 = input.Link_to_logo_if_applicable.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157790, link1);
+		data1.put(3912018000000157800, input.Are_there_any_specific_imagery_or_visual_elements_to_include);
+		//Format from HTML
+		link1 = input.Link_to_existing_imagery_or_stock_photo_resources.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000157816, link1);
+		data1.put(3912018000000157852, input.What_key_features_should_the_website_include);
+		data1.put(3912018000000157900, input.Website_Key_Features_Other);
+		data1.put(3912018000000158027, input.Will_any_third_party_tools_or_integrations_be_needed);
+		data1.put(3912018000000158071, input.Third_Party_Integration_Other);
+		data1.put(3912018000000158083, input.Are_there_any_competitors_whose_branding_you_admire);
+		//Format from HTML
+		link1 = input.If_yes_list_the_websites_and_what_you_like_about_them.remove("<a href=");
+		link1 = link1.remove("\"");
+		_blankIndex = link1.find("_blank");
+		link1 = link1.left(_blankIndex - 10);
+		data1.put(3912018000000158099, link1);
+		data1.put(3912018000000158109, input.List_any_websites_that_inspire_the_design_not_necessarily_competitors);
+		data1.put(3912018000000158119, input.Any_additional_preferences_or_design_elements_to_consider);
+		data1.put(3912018000000158127, input.Any_specific_design_elements_or_styles_to_avoid);
+		data1.put(3912018000000157315, input.Where_should_final_design_files_be_delivered1);
+		data1.put(3912018000000158158, input.Preferred_file_formats_e_g_HTML_PNG_PSD_etc);
+		data1.put(3912018000000131264, input.Expertise);
+
+		data_list1.add(data1);
+		mergeData1.put("data",data_list1);
+		//
+		param1 = Map();
+		param1.put("merge_data",mergeData1);
+		param1.put("output_format","pdf");
+		param1.put("response_type","link");
+		param1.put("test_mode",true);
+		documentid = "aog0r03935cbe4b3241a287fca3a3c139ab12";
+		response = invokeurl
+		[
+			url :"https://www.zohoapis.com/writer/api/v1/documents/" + documentid + "/merge"
+			type :POST
+			parameters:param1
+			connection:"zoho_writer_connection"
+		];
+		info response.get("URL");
+		pdfLink = response.get("URL");
+	}
+}
+if(sendType == "Zoho Projects")
+{
+	taskProject = input.Project_Name;
+	projectId = Zoho_Projects[ID == taskProject].Project_ID;
+	taskName = "";
+	if(input.Expertise == "Design/UX") {
+		taskName = input.Expertise + " - " + input.Design_UX_Deliverables;
+	}
+	else if ( input.Expertise == "PPC" ) {
+		taskName = input.Expertise + " - " + input.PPC_Briefs;
+	}
+	else {
+		taskName = input.Expertise;
+	}
+	newLine = hexToText("0A");
+	taskDescription = "";
+	if(input.Description.isEmpty() == False) {
+		taskDescription = input.Task_Description + newLine;
+	}
+	downloadLink =  "<a href='" + "http://" + pdfLink + ".com" + "'>" + "PDF Download " + "</a>";
+	taskDescription = "Start Date: " + input.Start_Date.toString("MM-dd-yyyy") + newLine + "Due Date: " + input.Due_Date.toString("MM-dd-yyyy") + newLine + "Description: " + input.Project_Description_and_Background + newLine + "Industry: " + input.Industry;
+	taskDescription = taskDescription + newLine + "Website: " + input.Website + newLine + "Full brief Information:" + newLine + downloadLink;
+	taskMap = Map();
+	taskMap.put("name",taskName);
+
+	taskMap.put("description", taskDescription);
+	taskMap.put("start_date", input.Start_Date.toString("MM-dd-yyyy"));
+	taskMap.put("end_date", input.Due_Date.toString("MM-dd-yyyy"));
+	portalId = 700847588;
+	newTask = zoho.projects.create(portalId, projectId.toLong(), "tasks", taskMap, "zoho_projects_connection");
+	info newTask;
+}
+else if(sendType == "Zoho Desk")
+{
+	ticketMap = Map();
+	ticketMap.put("subject",taskName);
+	ticketMap.put("departmentId",453940000000006907);
+	ticketMap.put("contactId",453940000002697001);
+	deskOrgId = 700847586;
+	searchValue = {"email":"kim@hafferi.com"};
+	// contact = zoho.desk.searchRecords(deskOrgId, "Contacts", searchValue, 0, 10, "zoho_desk_connection");
+	// info contact;
+	header = Map();
+	header.put("orgId",700847586);
+	recordValue = {"subject":"Create ticket","departmentId":"453940000000006907","contactId":"453940000002697001"};
+	newTicket = zoho.desk.create(deskOrgId,"tickets",recordValue,"zoho_desk_connection");
+	info newTicket;
+}
+else if(sendType == "Email")
+{
+	subjectDeliverable = "";
+	if(input.Expertise == "Design/UX")
+	{
+		subjectDeliverable = input.Design_UX_Deliverables;
+	}
+	else
+	{
+		subjectDeliverable = input.Expertise;
+	}
+	newline = "<br>";
+	emailSubject = subjectDeliverable + " – New brief from hafferi - " + input.Service_Provider_Name + " – " + input.ZProjects_Name + " " + input.Due_Date.toString("dd-MMM-yyyy");
+	emailBody = "Hi " + input.Service_Provider_Name + newline + newline + "I hope you're doing well." + newline + newline + "Please find the details for the new project brief attached. Below are the key highlights for your reference:" + newline + newline;
+	emailBody = emailBody + "Project/Brief Title: " + input.ZProjects_Name + newline + "Task Name: " + subjectDeliverable + newline + "Description: " + input.Project_Description_and_Background + "Start Date: " + input.Start_Date.toString("dd-MMM-yyyy") + newline + "Deadline: " + input.Due_Date.toString("dd-MMM-yyyy") + newline + "Industry :" + input.Industry + newline + "Website: " + input.Website + newline + newline;
+	emailBody = emailBody + "Let me know if you have any questions or need further clarification. I look forward to your confirmation of receipt and an update on the task progress." + newline + newline + "Thank you for your attention to this!" + newline + newline + " Best regards," + newline + "Jorge Martins - hafferi Digital Inc";
+	if(expertiseValue == "Analytics & Tracking")
+	{
+		sendmail
+		[
+			from :"Jorge Martins <" + zoho.adminuserid + ">"
+			to :input.Send_To
+			subject :emailSubject
+			message :"<div>" + emailBody + "</div>"
+			Attachments :template:Analytics_Tracking as PDF
+		]
+	}
+	if(expertiseValue == "Design/UX")
+	{
+		if(designUXDeliverable == "Landing Page Design")
+		{
+			sendmail
+			[
+				from :"Jorge Martins <" + zoho.adminuserid + ">"
+				to :input.Send_To
+				subject :emailSubject
+				message :"<div>" + emailBody + "</div>"
+				Attachments :template:Landing_Page_Design as PDF
+			]
+		}
+		if(designUXDeliverable == "Branding and Identity Brief Checklist for Designers")
+		{
+			sendmail
+			[
+				from :"Jorge Martins <" + zoho.adminuserid + ">"
+				to :input.Send_To
+				subject :emailSubject
+				message :"<div>" + emailBody + "</div>"
+				Attachments :template:Branding_and_Identity_Brief_Checklist_for_Designers as PDF
+			]
+		}
+		if(designUXDeliverable == "Website/Blog Design Brief Checklist for Designers")
+		{
+			sendmail
+			[
+				from :"Jorge Martins <" + zoho.adminuserid + ">"
+				to :input.Send_To
+				subject :emailSubject
+				message :"<div>" + emailBody + "</div>"
+				Attachments :template:Branding_and_Identity_Brief_Checklist_for_Designers as PDF
+			]
+		}
+	}
+}
