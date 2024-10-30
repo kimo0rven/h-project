@@ -1,0 +1,21 @@
+urlList = input.Destination_URLs.toList("\n");
+if(urlList.isEmpty() == False)
+{
+	if(Tracking_URLS_UTM_Campaign.isEmpty() == False && Tracking_URLS_UTM_Source.isEmpty() == False)
+	{
+		UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source;
+		UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium;
+		UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign;
+		UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content;
+		UTMTerm = "utm_term=" + input.Tracking_URLS_UTM_Term;
+		// 		input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ", "");
+		// 		input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.remove("PleasefillalltherequiredfieldsbeforewecangeneratetheUTMURL.");
+		input.Generated_UTM_tracking_URL = "";
+		for each  url in urlList
+		{
+			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ","");
+			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL + "http://" + url + "/?" + UTMSource.replaceAllIgnoreCase(" ","%") + "&" + UTMMedium.replaceAllIgnoreCase(" ","%") + "&" + UTMCampaign.replaceAllIgnoreCase(" ","%") + "&" + UTMContent + "&" + UTMContent + "&" + "\n";
+		}
+	}
+}
+input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.subString(0,input.Generated_UTM_tracking_URL.length() - 1);
