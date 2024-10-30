@@ -8,7 +8,7 @@ if(input.Destination_URLs.isEmpty() == False)
 	else
 	{
 		input.Generated_UTM_tracking_URL = "";
-		UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source;
+		UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source.replaceAllIgnoreCase(" ","%");
 		UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium.replaceAllIgnoreCase(" ","%");
 		UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign.replaceAllIgnoreCase(" ","%");
 		UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content.replaceAllIgnoreCase(" ","%");
