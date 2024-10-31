@@ -1,0 +1,20 @@
+if(input.Save_Preset == true ) {
+	if(input.Preset_Name.isEmpty())
+	{
+		input.preset_message = "<p style=\"color:red;\">Preset Name Required</p>";
+	}
+	else
+	{
+		newPreset = Map();
+		newPreset.put("Preset_Name",input.Preset_Name);
+		newPreset.put("Preset_UTM_Campaign",input.Tracking_URLS_UTM_Campaign);
+		newPreset.put("Preset_UTM_Medium",input.Tracking_URLS_UTM_Medium);
+		newPreset.put("Preset_UTM_Source",input.Tracking_URLS_UTM_Source);
+		newPreset.put("Preset_UTM_Content",input.Tracking_URLS_UTM_Content);
+		newPreset.put("Preset_UTM_Term",input.Tracking_URLS_UTM_Term);
+		optional = Map();
+		response = zoho.creator.createRecord("hafferi","utm-generator","Presets",newPreset,optional,"zoho_creator_connection");
+		info response;
+	}
+}
+
