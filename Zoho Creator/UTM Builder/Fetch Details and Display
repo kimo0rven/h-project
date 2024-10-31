@@ -1,0 +1,37 @@
+if(input.Lookup_Project_Name.isEmpty() == false) {
+	utm_records = UTM_Builder[UTM_Builder_Project_ID = Project_Name].ID.getAll();
+
+	text = "";
+		labelDestinationURL = "<div style='flex: 2;'>URL</div>";
+		labelCampaign = "<div style='flex: 2;'>Campaign</div>";
+		labelMedium = "<div style='flex: 2;'>Medium</div>";
+		labelSource = "<div style='flex: 2;'>Source</div>";
+		labelContent = "<div style='flex: 2;'>Content</div>";
+		labelTerm = "<div style='flex: 2;'>Term</div>";
+		labelAction = "<div style='flex: 2;'>Action</div>";
+		text = "<div style='display:flex;flex-direction:row;justify-content:space-around;align-items: center;'>" + labelDestinationURL + labelCampaign + labelMedium + labelSource + labelContent + labelTerm + labelAction + "</div>";
+		/// 
+	for each  recordID in utm_records
+	{
+		report = zoho.creator.getRecordById("hafferi","utm-generator","All_Utm_Builders",recordID,"zoho_creator_connection");
+		data = report.get("data");
+
+	// 	 = "<div style='display: block;flex-grow: 0;flex-shrink: 1;flex-basis: auto;align-self: auto;order: 0;'>test</div>";
+// 		DestinationURL = "<div style='flex: 1;'>" + data.get("Generated_UTM_tracking_URL") + "</div>";
+		DestinationURL = "<div style='flex: 2; word-wrap: break-word; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" + data.get("Generated_UTM_tracking_URL") + "</div>";
+		Campaign = "<div style='flex: 2;'>" + data.get("Tracking_URLS_UTM_Campaign") + "</div>";
+		Medium = "<div style='flex: 2;'>" + data.get("Tracking_URLS_UTM_Medium") + "</div>";
+		Source = "<div style='flex: 2;'>" + data.get("Tracking_URLS_UTM_Source") + "</div>";
+		Content = "<div style='flex: 2;'>" + data.get("Tracking_URLS_UTM_Source") + "</div>";
+		Term = "<div style='flex: 2;'>" + data.get("Tracking_URLS_UTM_Source") + "</div>";
+// 		url = "https://creatorapp.zoho.com/hafferi/utm-generator/record-summary/All_Utm_Builders/" + recordID;
+		url = "https://creatorapp.zoho.com/hafferi/utm-generator/#Form:UTM_Builder?recLinkID=" + recordID + "&viewLinkName=All_Utm_Builders";
+		
+		
+		test = "<div style='flex: 2;'><a target='_blank' href='" + url + "'>Edit</a></div>";
+		text = text + "<div style='display:flex;flex-direction:row;justify-content:space-around;align-items: center;'>" + DestinationURL + Campaign + Medium + Source + Content + Term + test +  "</div><br>";
+	} 
+	// 
+	input.record_detail_display = text;
+
+}
