@@ -1,0 +1,13 @@
+if(input.Apply_a_Preset.isEmpty() == false) {
+	presetID = Presets [ ID == input.Apply_a_Preset ].ID;
+
+	preset = zoho.creator.getRecordById("hafferi","utm-generator","Preset_Report", presetID, "zoho_creator_connection");
+	presetData = preset.get("data");
+	presetName = presetData.get("Preset_Name");
+	Tracking_URLS_UTM_Medium = presetData.get("Preset_UTM_Medium");
+	Tracking_URLS_UTM_Campaign = presetData.get("Preset_UTM_Campaign");
+	Tracking_URLS_UTM_Content = presetData.get("Preset_UTM_Content");
+	Tracking_URLS_UTM_Term = presetData.get("Preset_UTM_Term");
+	Tracking_URLS_UTM_Source = presetData.get("Preset_UTM_Source");
+
+}
