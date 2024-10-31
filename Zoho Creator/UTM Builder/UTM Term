@@ -1,0 +1,25 @@
+if(input.Destination_URLs.isEmpty() = false) {
+	input.Generated_UTM_tracking_URL = "";
+	urlList = input.Destination_URLs.toList("\n");
+	if(urlList.isEmpty())
+	{
+		input.Generated_UTM_tracking_URL = "Please fill all the required fields before we can generate the UTM URL.";
+	}
+	else
+	{
+		UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source.replaceAllIgnoreCase(" ","%");
+		UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium.replaceAllIgnoreCase(" ","%");
+		UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign.replaceAllIgnoreCase(" ","%");
+		UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content.replaceAllIgnoreCase(" ","%");
+		UTMTerm = "utm_term=" + input.Tracking_URLS_UTM_Term.replaceAllIgnoreCase(" ","%");
+		input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ","");
+		input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.remove("PleasefillalltherequiredfieldsbeforewecangeneratetheUTMURL.");
+		for each  url in urlList
+		{
+			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ","");
+			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL + "http://" + url + "/?" + UTMSource + "&" + UTMMedium + "&" + UTMCampaign + "&" + UTMContent + "&" + UTMContent + "&" + "\n";
+		}
+	}
+	input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.subString(0,input.Generated_UTM_tracking_URL.length() - 1);
+
+}
