@@ -2,13 +2,13 @@ if(input.Lookup_Project_Name.isEmpty() == false) {
 	utm_records = UTM_Builder[UTM_Builder_Project_ID = Project_Name].ID.getAll();
 
 	text = "";
-		labelDestinationURL = "<div style='flex: 2;'>URL</div>";
-		labelCampaign = "<div style='flex: 2;'>Campaign</div>";
-		labelMedium = "<div style='flex: 2;'>Medium</div>";
-		labelSource = "<div style='flex: 2;'>Source</div>";
-		labelContent = "<div style='flex: 2;'>Content</div>";
-		labelTerm = "<div style='flex: 2;'>Term</div>";
-		labelAction = "<div style='flex: 2;'>Action</div>";
+		labelDestinationURL = "<div style='flex: 2;'><strong>URL</strong></div>";
+		labelCampaign = "<div style='flex: 2;'><strong>Campaign</strong></div>";
+		labelMedium = "<div style='flex: 2;'><strong>Medium</strong></div>";
+		labelSource = "<div style='flex: 2;'><strong>Source</strong></div>";
+		labelContent = "<div style='flex: 2;'><strong>Content</strong></div>";
+		labelTerm = "<div style='flex: 2;'><strong>Term</strong></div>";
+		labelAction = "<div style='flex: 2;'><strong>Action</strong></div>";
 		text = "<div style='display:flex;flex-direction:row;justify-content:space-around;align-items: center;'>" + labelDestinationURL + labelCampaign + labelMedium + labelSource + labelContent + labelTerm + labelAction + "</div>";
 		/// 
 	for each  recordID in utm_records
