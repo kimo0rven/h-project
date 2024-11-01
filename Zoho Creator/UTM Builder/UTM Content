@@ -1,33 +1,56 @@
-urlList = input.Destination_URLs.toList("\n");
-if(urlList.isEmpty() == False)
+if(input.Destination_URLs.isEmpty() == false)
 {
-	if(Tracking_URLS_UTM_Medium.isEmpty() == False && Tracking_URLS_UTM_Source.isEmpty() == False)
+	projectID = input.Project_Name;
+	spaceChar = Projects[ID == projectID].Space_Character;
+	paramLowerCase = Projects[ID == projectID].Force_all_campaigns_parameters_to_lowercase;
+	enableUTMParameters = Projects[ID == projectID].Enable_UTM_parameters;
+	//Campaign parameter data
+	urlList = input.Destination_URLs.toList("\n");
+	if(Tracking_URLS_UTM_Campaign.isEmpty() == false && Tracking_URLS_UTM_Medium.isEmpty() == false && Tracking_URLS_UTM_Source.isEmpty() == false)
 	{
-		if(input.Force_all_campaigns_parameters_to_lowercase == true)
+		space = spaceChar;
+		if(space.isEmpty())
 		{
-			UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source.replaceAllIgnoreCase(" ","%").toLowerCase();
-			UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium.replaceAllIgnoreCase(" ","%").toLowerCase();
-			UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign.replaceAllIgnoreCase(" ","%").toLowerCase();
-			UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content.replaceAllIgnoreCase(" ","%").toLowerCase();
-			UTMTerm = "utm_term=" + input.Tracking_URLS_UTM_Term.replaceAllIgnoreCase(" ","%").toLowerCase();
+			space = "%";
 		}
-		else
+		contentBool = Projects[ID == projectID].UTM_Content_Setting;
+		contentSetting = "";
+		if(enableUTMParameters == true)
 		{
-			UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source;
-			UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium.replaceAllIgnoreCase(" ","%");
-			UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign.replaceAllIgnoreCase(" ","%");
-			UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content.replaceAllIgnoreCase(" ","%");
-			UTMTerm = "utm_term=" + input.Tracking_URLS_UTM_Term.replaceAllIgnoreCase(" ","%");
+			if(contentBool == "Required?")
+			{
+				contentSetting = Projects[ID == projectID].UTM_Content_Maximum_Characters;
+			}
 		}
-		//
-		// 		input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ", "");
-		// 		input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.remove("PleasefillalltherequiredfieldsbeforewecangeneratetheUTMURL.");
+		maxedContent = input.Tracking_URLS_UTM_Content;
+		if(input.Tracking_URLS_UTM_Content.len() > contentSetting.toNumber())
+		{
+			info 1;
+			maxedContent = maxedContent.left(contentSetting.toNumber());
+			input.Tracking_URLS_UTM_Content = maxedContent;
+		}
+		UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source.replaceAllIgnoreCase(" ",space);
+		UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium.replaceAllIgnoreCase(" ",space);
+		UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign.replaceAllIgnoreCase(" ",space);
+		UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content.replaceAllIgnoreCase(" ",space);
+		UTMTerm = "utm_term=" + input.Tracking_URLS_UTM_Term.replaceAllIgnoreCase(" ",space);
+		if(paramLowerCase)
+		{
+			UTMSource = UTMSource.toLowerCase();
+			UTMMedium = UTMMedium.toLowerCase();
+			UTMCampaign = UTMCampaign.toLowerCase();
+			UTMContent = UTMContent.toLowerCase();
+			UTMTerm = UTMTerm.toLowerCase();
+		}
 		input.Generated_UTM_tracking_URL = "";
 		for each  url in urlList
 		{
 			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ","");
-			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL + "http://" + url + "/?" + UTMSource + "&" + UTMMedium + "&" + UTMCampaign + "&" + UTMContent + "&" + UTMTerm + "&" + "\n";
+			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL + "http://" + url + "/?" + UTMSource + "&" + UTMMedium + "&" + UTMCampaign + "&" + UTMContent + "&" + UTMTerm + "\n";
 		}
 	}
+	input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.subString(0,input.Generated_UTM_tracking_URL.length() - 1);
 }
-input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.subString(0,input.Generated_UTM_tracking_URL.length() - 1);
+else {
+	Generated_UTM_tracking_URL = "Please fill all the required fields before we can generate the UTM URL.";
+}
