@@ -1,0 +1,2 @@
+url = "https://creatorapp.zoho.com/hafferi/utm-generator/#Form:UTM_Builder?Project_Name=" + input.ID;
+openUrl(url,"same window");
