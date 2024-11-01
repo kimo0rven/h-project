@@ -1,40 +1,35 @@
-if(input.Destination_URLs.isEmpty() == false) {
+if(Project_Name.isEmpty() == false)
+{
 	projectID = input.Project_Name;
 	spaceChar = Projects[ID == projectID].Space_Character;
 	paramLowerCase = Projects[ID == projectID].Force_all_campaigns_parameters_to_lowercase;
 	enableUTMParameters = Projects[ID == projectID].Enable_UTM_parameters;
 	//Campaign parameter data
-	
-	
 	urlList = input.Destination_URLs.toList("\n");
-	
-	if(Tracking_URLS_UTM_Campaign.isEmpty() == false && Tracking_URLS_UTM_Medium.isEmpty() == false &&  Tracking_URLS_UTM_Source.isEmpty() == false) {
+	if(input.Destination_URLs.isEmpty() == false && input.Tracking_URLS_UTM_Campaign.isEmpty() == false && input.Tracking_URLS_UTM_Medium.isEmpty() == false)
+	{
 		space = spaceChar;
 		if(space.isEmpty())
 		{
 			space = "%";
 		}
-		contentBool = Projects[ID == projectID].UTM_Content_Setting;
-
-		contentSetting = "";
+		sourceBool = Projects[ID == projectID].UTM_Source_Setting;
+		sourceSetting = "";
 		if(enableUTMParameters == true)
 		{
-			if(contentBool == "Required?")
+			if(sourceBool == "Required?")
 			{
-				contentSetting = Projects[ID == projectID].UTM_Content_Maximum_Characters;
+				sourceSetting = Projects[ID == projectID].UTM_Source_Maximum_Characters;
 			}
 		}
-		maxedContent = input.Tracking_URLS_UTM_Content;
-
-		if(input.Tracking_URLS_UTM_Content.len() > contentSetting.toNumber())
+		maxedSource = input.Tracking_URLS_UTM_Source;
+		if(input.Tracking_URLS_UTM_Source.len() > sourceSetting.toNumber())
 		{
-			info 1;
-			maxedContent = maxedContent.left(contentSetting.toNumber());
-			input.Tracking_URLS_UTM_Content = maxedContent;
+			maxedSource = maxedSource.left(sourceSetting.toNumber());
+			input.Tracking_URLS_UTM_Source = maxedSource;
 		}
-		
 		UTMSource = "utm_source=" + input.Tracking_URLS_UTM_Source.replaceAllIgnoreCase(" ",space);
-		UTMMedium = "utm_medium=" + input.Tracking_URLS_UTM_Medium.replaceAllIgnoreCase(" ",space);
+		UTMMedium = "utm_medium=" + maxedSource.replaceAllIgnoreCase(" ",space);
 		UTMCampaign = "utm_campaign=" + input.Tracking_URLS_UTM_Campaign.replaceAllIgnoreCase(" ",space);
 		UTMContent = "utm_content=" + input.Tracking_URLS_UTM_Content.replaceAllIgnoreCase(" ",space);
 		UTMTerm = "utm_term=" + input.Tracking_URLS_UTM_Term.replaceAllIgnoreCase(" ",space);
@@ -46,7 +41,7 @@ if(input.Destination_URLs.isEmpty() == false) {
 			UTMContent = UTMContent.toLowerCase();
 			UTMTerm = UTMTerm.toLowerCase();
 		}
-		Generated_UTM_tracking_URL = "";
+		input.Generated_UTM_tracking_URL = "";
 		for each  url in urlList
 		{
 			input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.replaceAllIgnoreCase(" ","");
@@ -54,4 +49,7 @@ if(input.Destination_URLs.isEmpty() == false) {
 		}
 	}
 	input.Generated_UTM_tracking_URL = input.Generated_UTM_tracking_URL.subString(0,input.Generated_UTM_tracking_URL.length() - 1);
+}
+else {
+	Generated_UTM_tracking_URL = "Please fill all the required fields before we can generate the UTM URL.";
 }
