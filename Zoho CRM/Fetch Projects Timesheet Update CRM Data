@@ -64,7 +64,7 @@ else
 	}
 	invoice = Map();
 	invoice.put("customer_id",customerId);
-	invoice.put("notes","Payable to HAFFERI DIGITAL INC.");
+	invoice.put("notes","Payable to ");
 	//Line Items
 	items = list();
 	optional = Map();
